@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Teams Organizational Chart</title>
+    </head>
+    <body>
+
+    <p>Teams Organizational Chart page by render</p>
+
+    {% if user.is_authenticated %}
+        <h4>Welcome {{ user.name }}!</h4>
+
+    {% else %}
+        <a href="{% url 'chart:signin' %}"> Click here to sign in </a>
+        
+    {% endif %}
+
+
+<!-- start drawing chart-->
+{% block content %}
+    <ul>
+        <li>
+            <a href="{% url 'chart:treeroot' %}">Go to Teams Organizational Chart</a>
+        </li>
+    </ul>
+    
+
+    
+    {% if user.is_authenticated %}
+    <table>   
+        <thead>
+            <th>Display Name</th>
+            <th>EmailAddress</th>
+        </thead>
+        <tbody>
+        {% for member in groups %}
+<!---            {%if member.displayName != None %} -->
+            {% url 'chart:detail' member.id as groupid %}
+            <tr>
+                <td><a href="{{groupid}}">{{member.displayName}}</a></td>
+                <td>{{member.mail}}</td>
+            </tr>
+<!--            {% endif %} -->
+        {% endfor %}
+
+        {% for member in users %}
+            <tr>
+                <td>{{member.displayName}}</td>
+                <td>{{member.mail}}</td>
+            </tr>                    
+        {% endfor %}
+
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}
+
+    </body>
+</html>
+
