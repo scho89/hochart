@@ -5,8 +5,7 @@
     <head>
         <meta charset="utf-8">
         <title>Tree</title>
-        <link rel="stylesheet" type="text/css" href="{% static '/tree.css' %}">
-
+        <link rel="stylesheet" type="text/css" href="{% static 'chart/tree.css' %}">
     </head>
     <body>
 
@@ -14,14 +13,16 @@
 <div class="parents">
 
     <ul>
-        <li><a href="#">{{tree.value.0.displayName}}</a></li>
-    </ul>
+        <li><a href="#">{{tree.value.0.displayName}}</a>
 
-</div>
 
 
 {% include "chart/treebody.html" %}
 
+        </li>
+    </ul>
+
+</div>
 
     </body>
 </html>
