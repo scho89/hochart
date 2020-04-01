@@ -14,4 +14,5 @@ urlpatterns=[
     path('deletehab/',views.deletehab,name='deletehab'),
     path('tree/<uuid:groupid>',views.tree,name='tree'),
     path('tree/',views.treeroot,name='treeroot'),
+    path('hab/',views.hab,name='hab'),
     ]

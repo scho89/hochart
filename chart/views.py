@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-from chart.auth_helper import get_sign_in_url, get_token_from_code, store_token, store_user, remove_user_and_token, get_token,get_user,get_hab_root,get_group_members,set_parents,get_parents_hab,delete_parents,get_tree,get_group
+from chart.auth_helper import get_sign_in_url, get_token_from_code, store_token, store_user, remove_user_and_token, get_token,get_user,get_hab_root,get_group_members,set_parents,get_parents_hab,delete_parents,get_tree,get_group,get_hab
 from django.urls import reverse
 
 # Create your views here.
@@ -146,6 +146,35 @@ def treeroot(request):
     else:
         return signin(request)
     
+
+def hab(request):
+    token,context = verify_signin(request)
+
+    if token:
+        hab_root = get_hab_root(token)
+        
+        if hab_root:
+
+            if 'hab' in request.session:
+                print('session hab true')
+                context['hab']=request.session['hab']
+
+                pass                
+
+            else:
+                hab_dic = get_hab(token,hab_root['value'][0]['id'],hab_root)
+                context['hab']=hab_dic
+                request.session['hab']=hab_dic
+
+            print(request.session['hab'])            
+            return render(request,'chart/habroot.html',context=context)
+
+        else:
+            return HttpResponse('Hierarchical Addressbook Root is not found.<br>Alias of HAB root need to set "hab_root"')
+
+    else:
+        return signin(request)
+
 
 
 def verify_signin(request):

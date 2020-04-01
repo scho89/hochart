@@ -1,0 +1,19 @@
+<div class="tree">
+<ul>
+    {% for member in hab.child %}
+    <li>
+        {% if member.type == '#microsoft.graph.group' %}
+        <a class="group" href="{% url 'chart:detail' member.id %}">{{member.displayName}}</a>
+            {% if member.child %}
+                {% with hab=member %}
+                    {% include "chart/hab_child.html" %}
+                {% endwith %}
+            {% endif %}
+
+        {% else %}
+            <a class="user">{{member.displayName}}</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+</div>

@@ -244,12 +244,36 @@ def get_tree(token,group_id,parents):
                 parents['child'].append(member)                
 
         return parents
-        
+
+def get_hab(token,group_id,parents):
+
+    # { 'child':[] 형식으로..}
+    parents['child']=[]
+    members = get_group_members(token,group_id)['value']
+
+    if len(members)==0:
+        return 'No child members'
+
+    else:
+        for member in members:
+            member['type']=member.pop('@odata.type')
+            if member['type']=='#microsoft.graph.group':
+                get_hab(token,member['id'],member)
+                parents['child'].append(member)
+
+            elif member['type']=='#microsoft.graph.user':
+                parents['child'].append(member)
+
+        return parents        
 
 def get_group(token,groupid):
     graph_client = OAuth2Session(token=token)
     group = graph_client.get('{0}/groups/{1}'.format(graph_url,groupid))    
 
     return group.json()
+
+
+
+
 
     
