@@ -5,6 +5,9 @@
     <head>
         <meta charset="utf-8">
         <title>HAB</title>
+        <script type="text/javascript" src="{% static 'chart/hab.js' %}"></script>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'chart/hab.css' %}">
 
     </head>
     <body>
@@ -13,10 +16,11 @@
 <div class="parents">
 
     <ul>
-        <li><a href="#">{{hab.value.0.displayName}}</a>
+        <li><a href="javascript:expand('{{hab.value.0.id}}')">{{hab.value.0.displayName}}</a>
+        <div id="{{hab.value.0.id}}">
 
-    {% include "chart/habbody.html" %}
-
+        {% include "chart/habbody.html" %}
+        </div>      
         </li>
     </ul>
 

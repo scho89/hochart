@@ -3,7 +3,7 @@
     <ul>
     {% for member in tree.child %}
         <li>
-            <a href="#">{{member.displayName}}</a>
+            <a href="{% url 'chart:detail' member.id %}">{{member.displayName}}</a>
             {% if member.child %}
                 {% with tree=member %}
                     {% include "chart/child.html" %}
