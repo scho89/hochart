@@ -6,6 +6,6 @@ function expandgroup(groupclass){
 
 function expand(id){
       var objGroup = document.getElementById(id);
-      if(objGroup.style.display!="none"){objGroup.style.display = "none";}
+      if(objGroup.style.display=="block"){objGroup.style.display = "none";}
       else{objGroup.style.display = "block"}      
 }

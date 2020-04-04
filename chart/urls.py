@@ -15,4 +15,6 @@ urlpatterns=[
     path('tree/<uuid:groupid>',views.tree,name='tree'),
     path('tree/',views.treeroot,name='treeroot'),
     path('hab/',views.hab,name='hab'),
+    path('who/',views.who,name='who'),
+    path('who/search',views.searchLast4,name='searchLast4'),
     ]

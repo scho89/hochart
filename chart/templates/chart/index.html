@@ -26,6 +26,18 @@
         <li>
             <a href="{% url 'chart:hab'%}">Go to Teams Hierarchical Address Book</a>
         </li>
+
+        <li>
+        <div id = "search_form">
+            <form action="{% url 'chart:searchLast4' %}" method="post">
+                {% csrf_token %}
+                <input type="text" id="phoneLast4" name="phoneLast4">
+                <label for="phoneLast4">전화번호 4자리</label><br>
+            <input type="submit" value="Search">
+            
+        </div>
+        </li>
+
     </ul>
     
 

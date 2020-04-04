@@ -2,9 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from chart.auth_helper import get_sign_in_url, get_token_from_code, store_token, store_user, remove_user_and_token, get_token,get_user,get_hab_root,get_group_members,set_parents,get_parents_hab,delete_parents,get_tree,get_group,get_hab
 from django.urls import reverse
+from django.views.decorators.clickjacking import xframe_options_exempt
+
+###for search function
+from chart.auth_helper import searchByPhone
 
 # Create your views here.
 
+@xframe_options_exempt
 def index(request):
     token,context = verify_signin(request)
 
@@ -176,6 +181,33 @@ def hab(request):
         return signin(request)
 
 
+def who(request):
+    token,context = verify_signin(request)
+
+    if token:
+
+        return render(request,'chart/who.html',context)
+
+    else:
+        return signin(request)
+
+def searchLast4(request):
+    token,context = verify_signin(request)
+
+    if token:
+
+        last4 = request.POST['phoneLast4']
+        search_result = searchByPhone(token,last4)
+        print(search_result)
+        context['users']=search_result
+
+        return render(request,'chart/whoResult.html',context)
+
+    else:
+        return signin(request)
+
+
+##################
 
 def verify_signin(request):
     context = initialize_context(request)

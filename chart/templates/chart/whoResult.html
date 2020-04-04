@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Who is it?</title>
+    </head>
+    <body>
+    <div id = "search_form">
+        <form action="{% url 'chart:searchLast4' %}" method="post">
+            {% csrf_token %}
+            <input type="text" id="phoneLast4" name="phoneLast4">
+            <label for="phoneLast4">전화번호 4자리</label><br>
+        <input type="submit" value="Search">
+        
+    </div>
+    <br>
+
+
+    {%if users %}
+        {% for user in users %}
+        <table>
+            <tr>
+                <td>DisplayName</td><td>{{user.displayName}} {{user.jobTitle}}</td>
+            </tr>
+            <tr>
+                <td>Email</td><td>{{user.mail}}</td>
+            </tr>
+            <tr>
+                <td>Department</td><td>{{user.department}}</td>
+            </tr>
+            <tr>
+                <td>Office</td>
+                <td>
+                {% for number in user.businessPhones %}
+                
+                    {{number}}<br>
+                
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>Mobile</td><td>{{user.mobilePhone}}</td>
+            </tr>
+        </table>
+        <br>
+        {% endfor %}
+
+    {% else %}
+        <h1>검색 결과 없음</h1>
+    {% endif %}
+
+    <ul>
+        <li>
+            <a href="{% url 'chart:index' %}">Go back to index...</a>
+        </li>
+
+    </ul>
+
+
+    </body>
+</html>
+

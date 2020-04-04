@@ -275,5 +275,40 @@ def get_group(token,groupid):
 
 
 
+def searchByPhone(token,last4):
+    graph_client = OAuth2Session(token=token)
+    userlist = []
+    nextpage = False
+    result=[]
+    selectquery='?$select=displayName,businessPhones,mail,jobTitle,Department,mobilePhone'
 
+    users = graph_client.get('{0}/users{1}'.format(graph_url,selectquery)).json()
+    userlist.append(users['value'])
+
+    if '@odata.nextLink' in users: 
+        nextpageurl = users['@odata.nextLink']
+        nextpage = True
+        while nextpage:
+            nextpageusers = graph_client.get(nextpageurl).json()
+            userlist.append(nextpageusers['value'])
+            if '@odata.nextLink' in nextpageusers:
+                nextpageurl = nextpageusers['@odata.nextLink']
+            
+            else:
+                nextpage = False
+
+        
+    for users in userlist:
+        for user in users:
+            if (user['mobilePhone'] != None) :
+                if user['mobilePhone'][-4:]==last4:
+                    result.append(user)
+
+            if (user['businessPhones']!= []):
+                for businessPhone in user['businessPhones']:
+                    if businessPhone[-4:]==last4:
+                        result.append(user)
+                                        
     
+    return result
+   
