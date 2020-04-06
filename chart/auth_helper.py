@@ -275,7 +275,7 @@ def get_group(token,groupid):
 
 
 
-def searchByPhone(token,last4):
+def searchByPhone(token,last4,last4only):
     graph_client = OAuth2Session(token=token)
     userlist = []
     nextpage = False
@@ -297,17 +297,30 @@ def searchByPhone(token,last4):
             else:
                 nextpage = False
 
-        
-    for users in userlist:
-        for user in users:
-            if (user['mobilePhone'] != None) :
-                if user['mobilePhone'][-4:]==last4:
-                    result.append(user)
-
-            if (user['businessPhones']!= []):
-                for businessPhone in user['businessPhones']:
-                    if businessPhone[-4:]==last4:
+    if last4only:
+        for users in userlist:
+            for user in users:
+                if (user['mobilePhone'] != None) :
+                    if user['mobilePhone'][-4:]==last4:
                         result.append(user)
+
+                if (user['businessPhones']!= []):
+                    for businessPhone in user['businessPhones']:
+                        if businessPhone[-4:]==last4:
+                            result.append(user)        
+
+
+    else:         
+        for users in userlist:
+            for user in users:
+                if (user['mobilePhone'] != None) :
+                    if last4 in ''.join(user['mobilePhone'].split('-')):
+                        result.append(user)
+
+                if (user['businessPhones']!= []):
+                    for businessPhone in user['businessPhones']:
+                        if last4 in ''.join(businessPhone.split('-')) :
+                            result.append(user)
                                         
     
     return result

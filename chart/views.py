@@ -192,7 +192,12 @@ def searchLast4(request):
     if token:
 
         last4 = request.POST['phoneLast4']
-        search_result = searchByPhone(token,last4)
+        if 'checkOnlyLast4' in request.POST:
+            last4only = bool(request.POST['checkOnlyLast4'])
+        else:
+            last4only = False
+
+        search_result = searchByPhone(token,last4,last4only)
         print(search_result)
         context['users']=search_result
 

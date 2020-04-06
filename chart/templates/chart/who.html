@@ -7,8 +7,11 @@
     <body>
         <form action="{% url 'chart:searchLast4' %}" method="post">
             {% csrf_token %}
-            <input type="text" id="phoneLast4" name="phoneLast4">
-            <label for="phoneLast4">전화번호 4자리</label><br>
+            
+            <label for="phoneLast4">검색할 번호 </label><input type="text" id="phoneLast4" name="phoneLast4"><br>
+            <label><input type="checkbox" id="checkOnlyLast4" name="checkOnlyLast4" value="True" checked>마지막 4자리만 확인</label>
+            <br>
+
         <input type="submit" value="Search">
         
 
