@@ -43,31 +43,7 @@
 
     
     {% if user.is_authenticated %}
-    <table>   
-        <thead>
-            <th>Display Name</th>
-            <th>EmailAddress</th>
-        </thead>
-        <tbody>
-        {% for member in groups %}
-<!---            {%if member.displayName != None %} -->
-            {% url 'chart:detail' member.id as groupid %}
-            <tr>
-                <td><a href="{{groupid}}">{{member.displayName}}</a></td>
-                <td>{{member.mail}}</td>
-            </tr>
-<!--            {% endif %} -->
-        {% endfor %}
-
-        {% for member in users %}
-            <tr>
-                <td>{{member.displayName}}</td>
-                <td>{{member.mail}}</td>
-            </tr>                    
-        {% endfor %}
-
-        </tbody>
-    </table>
+        {% include "chart/habroot.html" %}
     {% endif %}
 {% endblock %}
 

@@ -4,8 +4,8 @@
     {% for member in hab.child %}
         <li>
             {% if member.type == '#microsoft.graph.group' %}
-                <a class="group"  href="javascript:expand('{{member.id}}')">{{member.displayName}}</a>
-                <div class="groupMembers" id="{{member.id}}">
+            <a class="group" href="javascript:expand('{{member.id}}')">{{member.displayName}}</a>
+            <div class="groupMembers" id="{{member.id}}">
                 {% if member.child %}
                     {% with hab=member %}
                         {% include "chart/hab_child.html" %}
@@ -13,7 +13,11 @@
                 {% endif %}
                 </div>   
             {% else %}
-                <a class="user">{{member.displayName}} {{member.jobTitle}}</a>
+            <a class="user" href="javascript:detail('{{member.id}}')">{{member.displayName}} {{member.jobTitle}}</a>
+            <div class="detail" id="{{member.id}}">
+                    <a class="businessPhone">{{member.businessPhones.0}}</a>
+                    <a class="mail">{{member.mail}}</a>
+            </div>
             {% endif %}
                 
         </li>

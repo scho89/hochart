@@ -17,28 +17,23 @@ def index(request):
         hab_root = get_hab_root(token)
 
         if hab_root: 
-            member_data = get_group_members(token,hab_root['value'][0]['id'])
 
-            groups=[]
-            users=[]
-        
-            for item in member_data['value']:
-                if item['displayName'] != None:
-                    if item['@odata.type'] == '#microsoft.graph.group':
-                        groups.append(item)
-                    elif item['@odata.type'] == '#microsoft.graph.user':
-                        users.append(item)
+            if 'hab' in request.session:
+                print('session hab true')
+                context['hab']=request.session['hab']
 
-            context['groups']=groups
-            context['users']=users
+                pass                
+
+            else:
+                hab_dic = get_hab(token,hab_root['value'][0]['id'],hab_root)
+                context['hab']=hab_dic
+                request.session['hab']=hab_dic
+
 
             return render(request,'chart/index.html',context)
 
         else:
             return HttpResponseRedirect(reverse('chart:sethab'))
-
-        return render(request,'chart/index.html',context)
-
 
     else:
         return signin(request)
