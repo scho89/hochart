@@ -301,12 +301,12 @@ def searchByPhone(token,last4,last4only):
         for users in userlist:
             for user in users:
                 if (user['mobilePhone'] != None) :
-                    if user['mobilePhone'][-4:]==last4:
+                    if last4 in user['mobilePhone'][-4:]:
                         result.append(user)
 
                 if (user['businessPhones']!= []):
                     for businessPhone in user['businessPhones']:
-                        if businessPhone[-4:]==last4:
+                        if last4 in businessPhone[-4:]:
                             result.append(user)        
 
 
