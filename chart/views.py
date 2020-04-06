@@ -11,10 +11,15 @@ from chart.auth_helper import searchByPhone
 
 @xframe_options_exempt
 def index(request):
+    print(request.session)
     token,context = verify_signin(request)
 
     if token:
         hab_root = get_hab_root(token)
+
+        if 'firstPage' in  request.session:
+            if request.session['firstPage']=='who':
+                return HttpResponseRedirect(reverse('chart:who'))
 
         if hab_root: 
 
@@ -180,10 +185,13 @@ def who(request):
     token,context = verify_signin(request)
 
     if token:
+        if 'firstPage' in request.session:
+            request.session.pop('firstPage')
 
         return render(request,'chart/who.html',context)
 
     else:
+        request.session['firstPage']='who'
         return signin(request)
 
 def searchLast4(request):
