@@ -65,16 +65,16 @@ body {
 
 .parents li a:hover,
 .parents li a:hover+ul li a {
-	background: #e9453f;
+	background: #5558AF;
   color: #fff;
-  border: var(--border-width) solid #e9453f;
+  border: var(--border-width) solid #5558AF;
 }
 
 .parents li a:hover + ul li::after, 
 .parents li a:hover + ul li::before, 
 .parents li a:hover + ul::before, 
 .parents li a:hover + ul ul::before{
-	border-color:  #e9453f;
+	border-color:  #5558AF;
 }
 
 
@@ -183,14 +183,14 @@ body {
 
 .tree li a:hover,
 .tree li a:hover+ul li a {
-	background: #e9453f;
+	background: #5558AF;
   color: #fff;
-  border: var(--border-width) solid #e9453f;
+  border: var(--border-width) solid #5558AF;
 }
 
 .tree li a:hover + ul li::after, 
 .tree li a:hover + ul li::before, 
 .tree li a:hover + ul::before, 
 .tree li a:hover + ul ul::before{
-	border-color:  #e9453f;
+	border-color:  #5558AF;
 }

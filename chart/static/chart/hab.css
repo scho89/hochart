@@ -9,6 +9,7 @@ body {
 --ul-padding: 1.5em;
 }
 
+
 .parents ul{
   padding-left: var(--ul-padding);
 
@@ -20,8 +21,14 @@ body {
 
 }
 
+
 .parents li a{
 
+}
+
+.hab_root:hover{
+  background: #5558AF;
+  color: #FFF;
 }
 
 .parents li a:hover,
@@ -108,7 +115,7 @@ body {
 }
 
 .group:hover{
-  background: #e9453f;
+  background: #5558AF;
   color: #FFF;
 }
 
