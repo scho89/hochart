@@ -65,19 +65,9 @@ def detail(request,groupid):
     context['groups']=groups
     context['users']=users
 
-    habparents = get_parents_hab(token,groupid)
-    context['parents_id']=habparents
-
-    if habparents:
-        if habparents == "GO_TO_INDEX":
-            return render(request,'chart/index.html',context)
-
-        else:
-            return render(request,'chart/detail.html',context) 
-
-    else:
-        context['hab_error']={'msg':'HAB configuration is not completed.','url':'chart:sethab'}
-        return render(request,'chart/error.html',context)  
+    context['tree']=request.session['tree']
+    
+    return render(request,'chart/detail.html',context) 
 
 
 def sethab(request):
