@@ -307,7 +307,10 @@ def searchByPhone(token,last4,last4only):
                 if (user['businessPhones']!= []):
                     for businessPhone in user['businessPhones']:
                         if last4 in businessPhone[-4:]:
-                            result.append(user)        
+                            result.append(user)
+
+                if ( last4 in user['displayName'] ):
+                    result.append(user)
 
 
     else:         
@@ -323,7 +326,10 @@ def searchByPhone(token,last4,last4only):
                         businessPhoneProcessed = businessPhone.replace(' ','').replace('-','')
                         if last4 in businessPhoneProcessed :
                             result.append(user)
-                                        
+
+                if ( last4 in user['displayName'] ):
+                    result.append(user)
+
     
     return result
    
