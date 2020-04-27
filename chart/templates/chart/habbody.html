@@ -13,11 +13,13 @@
                 {% endif %}
                 </div>   
             {% else %}
-            <a class="user" href="javascript:detail('{{member.id}}')">{{member.displayName}} {{member.jobTitle}}</a>
-            <div class="detail" id="{{member.id}}">
-                    <a class="businessPhone">{{member.businessPhones.0}}</a>
-                    <a class="mail">{{member.mail}}</a>
-            </div>
+            <table>
+                <td><a class="user" href="https://teams.microsoft.com/l/chat/0/0?users={{member.mail}}" target="_blank">{{member.displayName}} {{member.jobTitle}}</a></td>
+                        <td>
+                        <a class="businessPhone">{{member.businessPhones.0}}</a></td>
+                        <td>
+                        <a class="mail">{{member.mail}}</a></td>
+                </table>
             {% endif %}
                 
         </li>
