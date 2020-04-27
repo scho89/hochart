@@ -200,6 +200,15 @@ body {
   color: #5558AF;
   text-align: center;
 }
+
+.groupName{
+  text-decoration: none;
+  color: #5558AF;
+  text-align: center;
+  font-weight: bold;
+  
+}
+
 .mail{
   text-decoration: none;
   color: #5558AF;

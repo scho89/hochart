@@ -47,8 +47,8 @@
 <!---            {%if member.displayName != None %} -->
             {% url 'chart:detail' member.id as groupid %}
             <tr>
-                <td><a href="{{groupid}}">{{member.displayName}}</a></td>
-                <td>{{member.mail}}</td>
+                <td><a class="groupName" href="{{groupid}}">{{member.displayName}}</a></td>
+                <td><a class="mail" href="mailto:{{member.mail}}">{{member.mail}}</a></td>
             </tr>
 <!--            {% endif %} -->
         {% endfor %}
