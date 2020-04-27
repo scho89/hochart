@@ -55,8 +55,8 @@
 
         {% for member in users %}
             <tr>
-                <td><a href="https://teams.microsoft.com/l/chat/0/0?users={{member.mail}}" target="_blank">{{member.displayName}}</a></td>
-                <td>{{member.mail}}</td>
+                <td><a class="userName" href="https://teams.microsoft.com/l/chat/0/0?users={{member.mail}}" target="_blank">{{member.displayName}}</a></td>
+                <td><a class="mail" href="mailto:{{member.mail}}">{{member.mail}}</a></td>
             </tr>                    
         {% endfor %}
 

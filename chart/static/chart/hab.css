@@ -91,6 +91,10 @@ body {
   text-decoration: none;
 }
 
+.mail{
+  text-decoration: none;
+}
+
 .group{
   border-style:solid;
   border-color: #ccc;

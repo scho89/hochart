@@ -194,3 +194,14 @@ body {
 .tree li a:hover + ul ul::before{
 	border-color:  #5558AF;
 }
+
+.userName{
+  text-decoration: none;
+  color: #5558AF;
+  text-align: center;
+}
+.mail{
+  text-decoration: none;
+  color: #5558AF;
+  text-align: center;
+}
