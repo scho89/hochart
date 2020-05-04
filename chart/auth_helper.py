@@ -8,6 +8,7 @@ import json
 from requests_oauthlib import OAuth2Session
 
 graph_url = 'https://graph.microsoft.com/v1.0'
+hab_tree_refresh_time = 60*60*24
 ####
 extention_id = 'com.contosohab.parents'
 
@@ -334,7 +335,7 @@ def searchByPhone(token,last4,last4only):
    
 def valid_tree_refreshed_time(session):
     try:
-        if time.time() - session['tree']['last_refreshed_time'] < 60:
+        if time.time() - session['tree']['last_refreshed_time'] < hab_tree_refresh_time:
             print('valid tree session')
             return True
 
@@ -345,7 +346,7 @@ def valid_tree_refreshed_time(session):
 
 def valid_hab_refreshed_time(session):
     try:
-        if time.time() - session['hab']['last_refreshed_time'] < 60:
+        if time.time() - session['hab']['last_refreshed_time'] < hab_tree_refresh_time:
             print('valid hab session')
             return True
 
