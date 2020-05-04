@@ -4,7 +4,6 @@ import os
 import time
 import json
 
-
 ###from graph_helper.py
 from requests_oauthlib import OAuth2Session
 
@@ -333,3 +332,24 @@ def searchByPhone(token,last4,last4only):
     
     return result
    
+def valid_tree_refreshed_time(session):
+    try:
+        if time.time() - session['tree']['last_refreshed_time'] < 60:
+            print('valid tree session')
+            return True
+
+        else:
+            return False
+    except KeyError:
+        return False
+
+def valid_hab_refreshed_time(session):
+    try:
+        if time.time() - session['hab']['last_refreshed_time'] < 60:
+            print('valid hab session')
+            return True
+
+        else:
+            return False
+    except KeyError:
+        return False

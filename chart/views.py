@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-from chart.auth_helper import get_sign_in_url, get_token_from_code, store_token, store_user, remove_user_and_token, get_token,get_user,get_hab_root,get_group_members,set_parents,get_parents_hab,delete_parents,get_tree,get_group,get_hab
+from chart.auth_helper import get_sign_in_url, get_token_from_code, store_token, store_user, remove_user_and_token, get_token,get_user,get_hab_root,get_group_members,set_parents,get_parents_hab,delete_parents,get_tree,get_group,get_hab,valid_hab_refreshed_time,valid_tree_refreshed_time
 from django.urls import reverse
 from django.views.decorators.clickjacking import xframe_options_exempt
+from time import time
 
 ###for search function
 from chart.auth_helper import searchByPhone
@@ -23,7 +24,7 @@ def index(request):
 
         if hab_root: 
 
-            if 'hab' in request.session:
+            if 'hab' in request.session and valid_hab_refreshed_time(request.session):
                 print('session hab true')
                 context['hab']=request.session['hab']
 
@@ -33,6 +34,8 @@ def index(request):
                 hab_dic = get_hab(token,hab_root['value'][0]['id'],hab_root)
                 context['hab']=hab_dic
                 request.session['hab']=hab_dic
+                request.session['hab']['last_refreshed_time'] = time()
+
 
 
             return render(request,'chart/index.html',context)
@@ -50,12 +53,12 @@ def detail(request,groupid):
 
     if(context['user']['is_authenticated']):
         token = get_token(request)
-        rawdata = get_group_members(token,groupid)
+        member_rawdata = get_group_members(token,groupid)
 
     groups=[]
     users=[]
 
-    for item in rawdata['value']:
+    for item in member_rawdata['value']:
         if item['displayName'] != None:
             if item['@odata.type'] == '#microsoft.graph.group':
                 groups.append(item)
@@ -123,7 +126,7 @@ def treeroot(request):
         
         if hab_root:
 
-            if 'tree' in request.session:
+            if 'tree' in request.session and valid_tree_refreshed_time(request.session):
                 print('session tree true')
                 context['tree']=request.session['tree']
                 pass                
@@ -132,6 +135,7 @@ def treeroot(request):
                 tree_dic = get_tree(token,hab_root['value'][0]['id'],hab_root)
                 context['tree']=tree_dic
                 request.session['tree']=tree_dic
+                request.session['tree']['last_refreshed_time']=time()
 
             return render(request,'chart/treeroot.html',context=context)
 

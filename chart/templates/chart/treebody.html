@@ -6,7 +6,7 @@
             <a href="{% url 'chart:detail' member.id %}">{{member.displayName}}</a>
             {% if member.child %}
                 {% with tree=member %}
-                    {% include "chart/child.html" %}
+                    {% include "chart/treebody.html" %}
                 {% endwith %}
             {% endif %}
         </li>
