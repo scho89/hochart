@@ -10,6 +10,14 @@
     <body>
 
     <script>
+
+        var authTokenRequest = {
+        successCallback: function(result) { console.log("Success: " + result); },
+        failureCallback: function(error) { console.log("Failure: " + error); },
+        };
+        microsoftTeams.authentication.getAuthToken(authTokenRequest);
+
+
         microsoftTeams.initialize();
         microsoftTeams.getContext();
         microsoftTeams.authenticate();
