@@ -20,35 +20,39 @@
     {% if user.is_authenticated %}
         <h4>Welcome {{ user.name }}!</h4>
 
+
+    <!-- start drawing chart-->
+    {% block content %}
+        <ul>
+            <li>
+                <a href="{% url 'chart:treeroot' %}">Go to Teams Organizational Chart</a>
+            </li>
+            <!--
+            <li>
+                <a href="{% url 'chart:hab'%}">Go to Teams Hierarchical Address Book</a>
+            </li>
+        -->
+            <li>
+                {% include 'chart/who.html' %}
+            </li>
+
+        </ul>
+        
+
+        
+        {% if user.is_authenticated %}
+            {% include "chart/habroot.html" %}
+        {% endif %}
+    {% endblock %}
+
+
+
+
     {% else %}
         <a href="{% url 'chart:signin' %}"> Click here to sign in </a>
         
     {% endif %}
 
-
-<!-- start drawing chart-->
-{% block content %}
-    <ul>
-        <li>
-            <a href="{% url 'chart:treeroot' %}">Go to Teams Organizational Chart</a>
-        </li>
-        <!--
-        <li>
-            <a href="{% url 'chart:hab'%}">Go to Teams Hierarchical Address Book</a>
-        </li>
-    -->
-        <li>
-            {% include 'chart/who.html' %}
-        </li>
-
-    </ul>
-    
-
-    
-    {% if user.is_authenticated %}
-        {% include "chart/habroot.html" %}
-    {% endif %}
-{% endblock %}
 
     </body>
 </html>
