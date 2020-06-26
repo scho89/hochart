@@ -44,8 +44,9 @@ def index(request):
             return HttpResponseRedirect(reverse('chart:sethab'))
 
     else:
-        return signin(request)
-
+        #return signin(request)
+        context={}
+        return render(request,'chart/index.html',context)
 
 def detail(request,groupid):
     print('start detail view')
